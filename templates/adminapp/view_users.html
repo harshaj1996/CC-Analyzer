@@ -1,0 +1,29 @@
+{% extends "adminapp/adminlayout.html" %}
+{% block content %}
+
+<div class="bs-example4" data-example-id="contextual-table">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>EMAIL</th>
+          <th>DESIGNATION</th>
+          <th>PURPOSE OF SEARCH</th>
+          <th>AUTHARIZATION</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in data %}
+        <tr>
+          <td>{{i.name}}</td>
+          <td>{{i.email}}</td>
+          <td>{{i.designation}}</td>
+          <td>{{i.purpose}}</td>
+          <td><a href="{% url 'approve' i.id %}">{{i.approve}}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+   </div>
+
+{% endblock %}

@@ -2,97 +2,69 @@ from django.shortcuts import render
 from adminapp.models import *
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.models import User
 from django.conf import settings
 import smtplib
 
 # Create your views here.
 
-def home(request):
-    return render(request,"publicapp/home.html",{})
+def index(request):
+    id=request.session['adminid']
+    return render(request,"adminapp/index.html",{})
 
-def about(request):
-    return render(request,"publicapp/about.html",{})
-
-def service(request):
-    return render(request,"publicapp/service.html",{})
-
-def terms(request):
-    return render(request,"publicapp/terms.html",{})
-
-def register(request):
-    msg=""
+def view_users(request):
     data=tbl_reg.objects.all()
-    if request.method=="POST":
-        na=request.POST.get('r1')
-        mail=request.POST.get('r2')
-        designation=request.POST.get('r3')
-        purpose=request.POST.get('r4')
-        if tbl_reg.objects.filter(email=mail):
-            msg="username already taken. Please choose another.."
-        else:
-            data=tbl_reg.objects.create(name=na,email=mail,designation=designation,purpose=purpose,password='null',usertype='user',approve='APPROVE')
-            return render(request,"publicapp/rsuccess.html",{})
-    return render(request,"publicapp/register.html",{'msg':msg})
+    return render(request,"adminapp/view_users.html",{'data':data})
 
-def login(request):
-    if request.method=="POST":
-        uname=request.POST.get('l1')
-        psw=request.POST.get('l2')
-        if tbl_log.objects.filter(username=uname,password=psw):
-            data=tbl_log.objects.get(username=uname,password=psw)
-            usertype=data.usertype
-            if usertype=="admin":
-                request.session["adminid"]=data.id
-                return HttpResponseRedirect(reverse('index')) 
-            if usertype=="user":
-                data2=tbl_reg.objects.get(email=uname)
-                request.session["userid"]=data2.id
-                return HttpResponseRedirect(reverse('profile'))
-        return render(request,"publicapp/error.html",{})
-    return render(request,"publicapp/login.html",{})
+def approve(request,id):
+    value=tbl_reg.objects.get(id=id)
+    if value.approve=="APPROVE":
+        password = User.objects.make_random_password(length=6, allowed_chars="abcdefghjkmnpqrstuvwxyz01234567889") 
+        new=tbl_log.objects.create(username=value.email,password=password,usertype=value.usertype)
+        pas1=password
+        value.password=pas1
+        mail=smtplib.SMTP('smtp.mailgun.org',587)
+        mail.ehlo()
+        mail.starttls()
+        mail.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+        message= "Hello, Your username is " + new.username + " and password is " + new.password + ". Thank you."
+        email=value.email
+        mail.sendmail(settings.EMAIL_HOST_USER,email,message)
+        value.approve="APPROVED!!!"
+        value.save()
+    return HttpResponseRedirect(reverse('view_users'))
 
-def password(request):
-    try:
-        if request.method=="POST":
-            em=request.POST.get("l1")
-            new=tbl_log.objects.get(username=em)
+def view_ausers(request):
+    item=tbl_log.objects.all()
+    return render(request,"adminapp/view_ausers.html",{'item':item})
+
+def delete(request,id):
+    dele=tbl_log.objects.filter(id=id).delete()
+    data=tbl_log.objects.all()
+    return HttpResponseRedirect(reverse('view_ausers'))
+
+def view_search(request):
+    item=tbl_csv.objects.all()
+    return render(request,"adminapp/view_search.html",{'item':item})
+
+def view_contact(request):
+    this=tbl_contact.objects.all()
+    return render(request,"adminapp/view_contact.html",{'this':this})
+
+def replay(request,id):
+    re=tbl_contact.objects.get(id=id)
+    if request.method=="POST":
+        if re.reply=="REPLY":
+            msg=request.POST.get('r1')
             mail=smtplib.SMTP('smtp.mailgun.org',587)
             mail.ehlo()
             mail.starttls()
             mail.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
-            message= "Hello, this message is from CCAnalyser-Credit Card Analysis.Your password is " + new.password + ". Thank you."
-            email=new.username
-            mail.sendmail(settings.EMAIL_HOST_USER,email,message)
-            return render(request,"publicapp/pas.html",{})
-    except:
-        return render(request,"publicapp/paserror.html",{})  
-    return render(request,"publicapp/password.html",{})
-
-def paserror(request):
-    return render(request,"publicapp/paserror.html",{})
-
-def pas(request):
-    return render(request,"publicapp/pas.html",{})
-
-def logout(request):
-    request.session.flush()
-    return HttpResponseRedirect(reverse('home'))
-
-def contact(request):
-    if request.method=="POST":
-        na=request.POST.get('c1')
-        mail=request.POST.get('c2')
-        sub=request.POST.get('c3')
-        msg=request.POST.get('c4')
-        data=tbl_contact.objects.create(name=na,email=mail,subject=sub,message=msg,reply='REPLY')
-        return render(request,"publicapp/csuccess.html",{})
-    return render(request,"publicapp/contact.html",{})
-
-def rsuccess(request):
-    return render(request,"publicapp/rsuccess.html",{})
-
-def csuccess(request):
-    return render(request,"publicapp/csuccess.html",{})
-
-def error(request):
-    return render(request,"publicapp/error.html",{})
+            name=re.name
+            reply_mail=re.email
+            reply_msg='Hi '+ name +' ,\n \t This is the reply from CCAnalyser.\n  '+ msg +'\n\t\t Thank you, \n\t\t CCAnalyser'
+            mail.sendmail(settings.EMAIL_HOST_USER,reply_mail,reply_msg)
+            re.reply="REPLIED!!!"
+            re.save()
+        return HttpResponseRedirect(reverse('view_contact'))
+    return render(request,"adminapp/replay.html",{'re':re})

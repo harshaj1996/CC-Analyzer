@@ -1,0 +1,27 @@
+{% extends "adminapp/adminlayout.html" %}
+{% block content %}
+
+<div class="bs-example4" data-example-id="contextual-table">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>USERNAME</th>
+          <th>PASSWORD</th>
+          <th>TYPE</th>
+          <th>BLOCKING</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in item %}
+        <tr class="active">
+          <td>{{i.username}}</td>
+          <td>{{i.password}}</td>
+          <td>{{i.usertype}}</td>
+          <td><a href="{% url 'delete' id=i.id %}">BLOCK</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+   </div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "adminapp/adminlayout.html" %}
+{% block content %}
+<br>
+<br>
+
+<form action="{% url 'replay' id=re.id %}?id=re.id" method="POST">{% csrf_token %}
+    <div class="col-md-8 inbox_right" style="position: relative;left: 20%">
+            <div class="Compose-Message">               
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Reply
+                    </div>
+                    <div class="panel-body">
+                        <label>Enter Recipient Name : </label>
+                        <input type="text" class="form-control1 control3" value="{{re.email}}" readonly>
+                        <br>
+                        <label>Enter Message : </label>
+                        <textarea rows="6" class="form-control1 control2" name="r1" required></textarea>
+                        <hr>
+                        <input type="submit" value="send">
+                    </div>
+                </div>
+            </div>
+    </div>
+</form>
+
+{% endblock %}

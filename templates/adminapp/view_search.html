@@ -1,0 +1,33 @@
+{% extends "adminapp/adminlayout.html" %}
+{% block content %}
+
+<div class="bs-example4" data-example-id="contextual-table">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>USER NAME</th>
+              <th>FILE NAME</th>
+              <th>LOCATION</th>
+              <th>TOTAL TRANSACTIONS</th>
+              <th>SAMPLE TAKEN</th>
+              <th>VALID TRANSACTIONS</th>
+              <th>INVALID TRANSACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in item %}
+                <tr >
+                    <td>{{i.username}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.loc}}</td>
+                    <td>{{i.total}}</td>
+                    <td>{{i.sample}}</td>
+                    <td>{{i.true}}</td>
+                    <td>{{i.false}}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+       </div>
+
+{% endblock %}

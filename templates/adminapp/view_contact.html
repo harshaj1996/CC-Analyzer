@@ -1,0 +1,30 @@
+{% extends "adminapp/adminlayout.html" %}
+{% block content %}
+
+<div class="bs-example4" data-example-id="contextual-table">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>EMAIL ID</th>
+          <th>SUBJECT</th>
+          <th>MESSAGE</th>
+          <th>REPLAY</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in this %}
+        <tr class="active">
+          <td>{{i.name}}</td>
+          <td>{{i.email}}</td>
+          <td>{{i.subject}}</td>
+          <td>{{i.message}}</td>
+          <td><a href="{% url 'replay' id=i.id %} ?id=i.id">{{i.reply}}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+   </div>
+
+{% endblock %}
