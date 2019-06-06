@@ -1,0 +1,218 @@
+<html lang="zxx" style="height: auto;"><head>
+    <title>Credit Card Fraud Analysis :: CCAnalyser</title>
+    <!--meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="D BUSINESS Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design">
+    <!--//meta tags ends here-->
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+
+    <!-- bootstrap style sheet -->
+    <link href="../static/publicapp/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!--smooth box-->
+    <link rel="stylesheet" href="../static/publicapp/css/smoothbox.css" type="text/css" media="all">
+    <!--stylesheets-->
+    <link href="../static/publicapp/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <!-- flexslider -->
+    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="all">
+    <!-- fontawesome -->
+    <link href="../static/publicapp/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Popup css (for Video Popup) -->
+    <link href="../static/publicapp/css/popuo-box.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="//fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <!-- nav -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <h1><a class="navbar-brand" href="{% url 'home' %}"><span class="brand-d">CC</span>ANALYSER</a></h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="navbar-brand" href="{% url 'home' %}"><h6>HOME</h6></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'about' %}"><h6>ABOUT</h6></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'service' %}"><h6>SERVICE</h6></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'terms' %}"><h6>TERMS</h6></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'register' %}"><h6>REGISTER</h6></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'login' %}"><h6>LOGIN</h6></a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'contact' %}"><h6>CONTACT</h6></a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- //nav -->
+
+    {% block content %}
+    {% endblock %}
+   
+    <!-- footer -->
+    <footer>
+        <p class="copyright-agileinfo"> Credit Card Fraud Analysis</p>
+    </footer>
+
+    <!-- //footer -->
+
+    <script src="../static/publicapp/js/jquery.min.v3.js"></script>
+
+    <script src="../static/publicapp/js/jquery-2.2.3.min.js"></script>
+
+    <!-- gallery -->
+    <script src="../static/publicapp/js/smoothbox.jquery2.js"></script>
+    <!-- //gallery -->
+
+
+    <!-- pop-up(for video popup)-->
+    <script src="../static/publicapp/js/jquery.magnific-popup.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.popup-with-zoom-anim').magnificPopup({
+                type: 'inline',
+                fixedContentPos: false,
+                fixedBgPos: true,
+                overflowY: 'auto',
+                closeBtnInside: true,
+                preloader: false,
+                midClick: true,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in'
+            });
+
+        });
+    </script>
+    <!-- //pop-up-box (syllabus section video)-->
+
+    <!-- video js (background) -->
+    <script src="../static/publicapp/js/jquery.vide.min.js"></script>
+    <!-- //video js (background) -->
+
+
+    <!-- banner Slider script  -->
+    <script src="../static/publicapp/js/responsiveslides.min.js"></script>
+    <script>
+        $(function () {
+            $("#slider, #slider1").responsiveSlides({
+                auto: true,
+                nav: false,
+                speed: 1500,
+                namespace: "callbacks",
+                pager: true,
+            });
+        });
+    </script>
+    <!-- //banner Slider-JavaScript -->
+    <script src="../static/publicapp/js/responsiveslides.min.js"></script>
+    <script>
+        $(function () {
+            $("#slider4").responsiveSlides({
+                auto: true,
+                pager: true,
+                nav: false,
+                speed: 1000,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
+        });
+    </script>
+
+
+
+    <!-- start-smooth-scrolling -->
+    <script src="../static/publicapp/js/move-top.js"></script>
+    <script src="../static/publicapp/js/easing.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smooth-scrolling -->
+    <!-- smooth-scrolling-of-move-up -->
+    <script>
+        $(document).ready(function () {
+            /*
+            var defaults = {
+            	containerID: 'toTop', // fading element id
+            	containerHoverID: 'toTopHover', // fading element hover id
+            	scrollSpeed: 1200,
+            	easingType: 'linear' 
+            };
+            */
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+    <script src="../static/publicapp/js/SmoothScroll.min.js"></script>
+    <!-- //smooth-scrolling-of-move-up -->
+
+
+
+
+    <!-- FlexSlider-JavaScript -->
+    <script defer="" src="../static/publicapp/js/jquery.flexslider.js"></script>
+    <script>
+        $(function () {
+            SyntaxHighlighter.all();
+        });
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+    </script>
+    <!-- //FlexSlider-JavaScript -->
+
+    <script src="../static/publicapp/js/bootstrap.min.js"></script>
+
+
+
+<a href="#" id="toTop" style="display: none;"><span id="toTopHover"></span>To Top</a></body></html>

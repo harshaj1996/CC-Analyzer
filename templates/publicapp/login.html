@@ -1,0 +1,168 @@
+<html lang="en"><!-- Head --><head>
+
+    <title>Credit Card Fraud Analysis :: CCAnalyser</title>
+    
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="Credit Card Validation Form Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //Meta-Tags -->
+    
+    <!-- Custom-Style-Sheet -->
+    <link rel="stylesheet" href="../static/publicapp/log/css/bootstrap.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../static/publicapp/log/css/style.css" type="text/css" media="all">
+    <!-- //Custom-Style-Sheet -->
+    
+    <!-- Fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" type="text/css" media="all">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700" type="text/css" media="all">
+    <!-- //Fonts -->
+    
+    <!-- Style -->
+    <style type="text/css">
+    
+        .wrap {
+            max-width: 980px;
+            margin: 10px auto 0;
+        }
+        #steps {
+            margin: 80px 0 0 0;
+        }
+        .commands {
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        .prev {
+            float:left
+        }
+    
+        .error {
+            color: #FFC107;
+        }
+        .next, .submit {
+            float:right
+        }
+        #progress {
+            position: relative;
+            height: 5px;
+            background-color: #eee;
+            margin-bottom: 50px;
+        }
+        #progress-complete {
+            border: 0;
+            position: absolute;
+            height: 5px;
+            min-width: 10px;
+            background-color: #F44336;
+            transition: width .2s ease-in-out;
+        }
+    
+        @media screen and (max-width: 966px) {
+            #progress {
+                margin-bottom: 30px;
+            }
+        }
+    
+        @media screen and (max-width: 320px) {
+            #progress {
+                margin-bottom: 20px;
+            }
+        }
+    
+    </style>
+    <!-- //Style -->
+    
+    </head>
+    <!-- //Head -->
+    
+    
+    
+        <!-- Body -->
+        <body>
+    
+                <h1>LOGIN NOW</h1>
+        
+                <div class="containerw3layouts-agileits">
+        
+                    
+        
+                    <form action="{% url 'login' %}" method="POSt" >{% csrf_token %}
+        
+                        <div id="step0" class="stepDetails"><div id="step0" class="stepDetails"><fieldset>
+                            
+                            
+                            <div class="form-group">
+                                <label for="Email">Username</label>
+                                <input id="Email" name="l1" type="email" class="form-control error" placeholder="user@email.com" required="" aria-required="true" aria-describedby="Email-error" aria-invalid="true">
+                            </div>
+
+                            <br><br>
+
+                            <div class="form-group">
+                                <label for="Password">Password</label>
+                                <input id="Password" name="l2" type="password" class="form-control w3-agileits error" placeholder="Password" required="" aria-required="true" aria-describedby="Password-error" aria-invalid="true">
+                            </div>
+                            
+                        <div class="w3lsfooteragileits" style="position: relative;left:36%">
+                            <p> Forgot password ? |  <a href="{% url 'password' %}">Yes</a></p>
+                        </div>
+
+                        <p id="step2commands" class="commands">
+                            <button id="SaveAccount" style="position: fixed;left: 46%" class="btn wthree btn-primary submit next valid" aria-invalid="false">SUBMIT</button>
+                        </p></fieldset></div></div>
+        
+                    </form>
+        
+                </div>
+        
+                <div class="w3lsfooteragileits">
+                    <p> Not a member yet? |  <a href="{% url 'register' %}">Register now</a></p>
+                    <br>
+                    <p><a href="{% url 'home' %}">Back to home</a></p>
+                </div>
+
+        
+                <!-- Necessary-JavaScript-Files-&-Links -->
+        
+                    <!-- Default-JavaScript --><script type="text/javascript" src="../static/publicapp/log/js/jquery.min.js"></script>
+                    <script src="../static/publicapp/log/js/jquery.validate.min.js"></script>
+                    <script src="../static/publicapp/log/js/jquery.formtowizard.js"></script>
+                    <script>
+                        $( function() {
+                            var $signupForm = $( '#SignupForm' );
+                            $signupForm.validate({errorElement: 'em'});
+                            $signupForm.formToWizard({
+                                submitButton: 'SaveAccount',
+                                nextBtnClass: 'btn btn-primary next',
+                                prevBtnClass: 'btn btn-default prev',
+                                buttonTag:    'button',
+                                validateBeforeNext: function(form, step) {
+                                    var stepIsValid = true;
+                                    var validator = form.validate();
+                                    $(':input', step).each( function(index) {
+                                        var xy = validator.element(this);
+                                        stepIsValid = stepIsValid && (typeof xy == 'undefined' || xy);
+                                    });
+                                    return stepIsValid;
+                                },
+                                progress: function (i, count) {
+                                    $('#progress-complete').width(''+(i/count*100)+'%');
+                                }
+                            });
+                        });
+                    </script>
+        
+                <!-- //Necessary-JavaScript-Files-&-Links -->
+        
+        
+        
+            
+            <!-- //Body -->
+        
+        
+        
+        
+    
+    </body></html>
+
